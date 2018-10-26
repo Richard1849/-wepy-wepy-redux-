@@ -1,0 +1,65 @@
+<style lang="less">
+ 
+</style>
+<template>
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="title-brand">
+  <text class="title">热门商品</text>
+</view>
+<view>
+ <Goodlist></Goodlist> 
+</view>
+
+</template>
+<script>
+  import wepy from 'wepy'
+  import Goodlist from '../components/goodList/goodList'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'yoker'
+    }
+    props = {
+    }
+    components = {
+      Goodlist
+    }
+    data = {
+      imgUrls: [
+        'http://imgcdn.guoku.com/images/310/cff316f54a804cd11f836d3c0813c751.jpg',
+        'http://imgcdn.guoku.com/images/310/8e121b76cc34865addb641c2d8a4cded.jpg',
+        'http://imgcdn.guoku.com/images/310/67b216143fe35c6e6aa1a2223e46f22a.jpg'
+      ],
+      indicatorDots: false,
+      autoplay: false,
+      interval: 5000,
+      duration: 1000
+    }
+    onLoad() {
+    }
+    computed = {
+    }
+
+    methods = {
+    }
+  }
+</script>
+<style lang="less" scoped>
+.title-brand{
+  padding: 0 5% 0 5%;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top:30rpx;
+  .title{
+    font-size: 32rpx;
+  }
+}
+
+</style>

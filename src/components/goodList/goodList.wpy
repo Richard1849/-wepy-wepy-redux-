@@ -1,0 +1,91 @@
+<template>
+<view class="goods-wrapper">
+  <repeat for="{{goodsList}}" key="index" index="index" item="item">
+    <navigator url="./details" open-type="navigate" hover-class="none">
+      <view class="goods" @tap="gotoDetails({{item}})">
+    <image src="{{item.img}}" mode="scaleToFill"
+      lazy-load="true">
+    </image>
+    <view class="goods-name">{{item.name}}</view>
+    <view class="goods-desc">
+      <text>{{item.desc}}</text>
+    </view>
+    <view class="goods-price">￥{{item.price}}</view>
+  </view>
+    </navigator>
+  </repeat>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import { SAVEGOODDETAIL } from '@/store/types/saveGoodDetail'
+import api from '../../api/api'
+
+@connect({},
+  {
+    saveGoodDetail: SAVEGOODDETAIL
+  })
+export default class Goodlist extends wepy.component {
+  data = {
+    goodsList: []
+  }
+  props= {
+    details: Object
+  }
+  onLoad() {
+    let that = this
+    that.getGoodsList()
+  }
+  async getGoodsList() {
+    const json = await api.getGoodsList({
+    })
+    this.goodsList = json.data.goods
+    this.$apply()
+  }
+  methods= {
+    gotoDetails(data) {
+      wepy.$store.dispatch({type: 'SAVEGOODDETAIL', payload: data})
+      console.log(wepy.$store.getState())
+    }
+  }
+}
+</script>
+<style lang="less" scoped>
+.goods-wrapper{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .goods{
+    padding:20rpx 37rpx 20rpx 37rpx;
+    border-bottom:2rpx solid rgb(237, 237, 237);
+    border-right:2rpx solid rgb(237, 237, 237);
+    image{
+      display: inline-block;
+      width:300rpx;
+      height:300rpx;
+    }
+    .goods-name{
+      text-align: left;
+      font-size: 24rpx;
+      color: rgb(153, 153, 153);
+      line-height: 1.5em;
+    }
+    .goods-desc{
+      width:300rpx; 
+      font-size: 26rpx;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 20rpx;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .goods-price{
+      color: rgb(0, 132, 207);
+      font-size: 26rpx;
+      text-align: left;
+    }
+  }
+}
+</style>

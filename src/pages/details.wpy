@@ -1,0 +1,33 @@
+<template>
+<view>
+    <detailsData :detailInfo.sync="detail"></detailsData>
+</view>
+</template>
+<script>
+import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import detailsData from '@/components/details/detailsData'
+@connect({
+  detail(state) {
+    return state.saveGoodDetail.goodDetail
+  }
+})
+export default class Details extends wepy.page {
+  config = {
+    navigationBarTitleText: '详情'
+  }
+  data = {
+    goods: {}
+  }
+  props= {
+    details: Object
+  }
+  components = {
+    detailsData
+  }
+  onLoad() {
+  }
+}
+</script>
+<style lang="less" scoped>
+</style>

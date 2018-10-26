@@ -1,0 +1,161 @@
+<template>
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="good-wrapper">
+<view class="good-title">{{detailInfo.name}}</view>
+<view class="good-desc">
+    {{detailInfo.desc}}
+</view>
+<view class="good-price">￥{{detailInfo.price}}</view>
+<view class="good-place">发货地 {{detailInfo.place}}</view>
+</view>
+<view class="row"></view>
+<view class="good-wrapper">
+<view class="bland">详情</view>
+<view class="good-info">{{detailInfo.info}}</view>
+<view class="bland">砍价须知</view>
+<view class="good-info">{{detailInfo.rule}}</view>
+</view>
+<footer class="good-bottom">
+  <view class="price-left">
+    <text wx:if="{{detailInfo.bargainState}}">￥{{detailInfo.barginPrice}}</text>
+    <text class="{{detailInfo.bargainState? 'bargined_price_style':''}}">￥{{detailInfo.price}}</text>
+  </view>
+  <view class="{{detailInfo.bargainState? 'btn_bargained':'btn_bargain'}}">
+    <text wx:if="{{!detailInfo.bargainState}}">去砍价</text>
+    <text wx:if="{{detailInfo.bargainState}}">已砍价</text>
+  </view>
+  <view class="call_btn">
+    <text>联系客服</text>
+  </view>
+</footer>
+</template>
+<script>
+import wepy from 'wepy'
+export default class DetailsData extends wepy.component {
+  props ={
+    detailInfo: {
+      type: Object,
+      default: {}
+    }
+  }
+  data ={
+    imgUrls: [
+      'http://imgcdn.guoku.com/images/310/530f3b41bbe01ffa3a2a6292bd7a1a6b.jpg'
+    ],
+    bargainState: false
+  }
+  onLoad() {
+    console.log(this.detailInfo)
+  }
+}
+</script>
+<style lang="less" scoped>
+.good-wrapper{
+  margin-left:  5%;
+  margin-right:  5%;
+  font-size:  32rpx;
+  min-height: 80rpx;
+  .good-title , .bland{
+  text-align:  center;
+  margin-top:  20rpx;
+  margin-bottom:  10rpx;
+  text-indent:  0rpx;
+  font-weight:  600;
+  display:  flex;
+  font-size: 30rpx;
+}
+.good-desc{
+  font-weight: 400;
+  font-size:  28rpx;
+  font-family:  "Microsoft YaHei";
+  line-height:  1.5em;
+  text-align:  left;
+  color:  rgb(156, 156, 156);
+}
+.good-price{
+  height: 70rpx;
+  color:  rgb(255, 0, 0);
+  font-weight:  600;
+  font-size:  40rpx;
+  line-height: 70rpx;
+}
+
+.good-place{
+  font-size:  24rpx;
+  color:  rgb(156, 156, 156);
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.good-info{
+  font-weight: 400;
+  font-size:  28rpx;
+  font-family:  "Microsoft YaHei";
+  line-height:  40rpx;
+  text-align:  left;
+  color:  rgb(156, 156, 156);
+  margin-bottom:  20rpx;
+}
+}
+.row{
+  width: 100%;
+  height: 20rpx;
+  background: rgb(242, 242, 242);
+}
+.good-bottom{
+  display:  flex;
+  justify-content:  flex-end;
+  min-height:  80rpx;
+  align-items:  flex-end;
+  flex-direction:  row;
+  border-top:  2rpx solid rgb(230, 230, 230);
+  border-top-style: none;
+  font-size:  32rpx;
+  color: #ffffff;
+  .price-left{
+    width: 50%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    color:  rgb(255, 0, 0);
+    font-weight:  600;
+    font-size:  40rpx;
+    .bargined_price_style{
+      color:  rgb(168, 168, 168);
+      text-decoration: line-through;
+      margin-left:10rpx;
+}
+  }
+  .btn_bargain{
+    width: 25%;
+    height:  80rpx;
+    background-color: rgba(255,66,78,1);
+    display:  flex;
+    justify-content:  center;
+    align-items:  center;
+  }
+  .btn_bargained{
+    width: 25%;
+    height:  80rpx;
+    background-color: rgb(189, 189, 189);
+    display:  flex;
+    justify-content:  center;
+    align-items:  center;
+  }
+  .call_btn{
+    width: 25%;
+    height:  80rpx;
+    background-color:  rgb(255, 97, 97);
+    display:  flex;
+    justify-content:  center;
+    align-items:  center;
+  }
+}
+</style>
