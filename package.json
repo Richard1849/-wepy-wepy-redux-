@@ -25,7 +25,8 @@
     "wepy-async-function": "^1.4.6",
     "wepy-com-toast": "^1.0.2",
     "wepy-redux": "^1.5.9",
-    "cryptiles": ">=4.1.2"
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=4.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
