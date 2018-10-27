@@ -1,0 +1,9 @@
+<template> 
+</template>
+<script>
+import wepy from 'wepy'
+export default class ShoppingCat extends wepy.page {
+}
+</script>
+<style lang="less" scoped>
+</style>

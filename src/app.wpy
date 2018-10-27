@@ -22,13 +22,46 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
-      'pages/details'
+      'pages/details',
+      'pages/classify',
+      'pages/mine',
+      'pages/shoppingCat'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    'tabBar': {
+      'color': '#999999',
+      'selectedColor': '#666',
+      'backgroundColor': '#ffffff',
+      'border-style': 'black',
+      'list': [{
+        'pagePath': 'pages/index',
+        'text': '首页',
+        'iconPath': './image/icon/home.png',
+        'selectedIconPath': './image/icon/home-fill.png'
+      },
+      {
+        'pagePath': 'pages/classify',
+        'text': '分类',
+        'iconPath': './image/icon/box.png',
+        'selectedIconPath': './image/icon/box-fill.png'
+      },
+      {
+        'pagePath': 'pages/shoppingCat',
+        'text': '购物车',
+        'iconPath': './image/icon/shoppingCar.png',
+        'selectedIconPath': './image/icon/shoppingCar-fill.png'
+      },
+      {
+        'pagePath': 'pages/mine',
+        'text': '我的',
+        'iconPath': './image/icon/user1.png',
+        'selectedIconPath': './image/icon/user-fill.png'
+      }]
     }
   }
 

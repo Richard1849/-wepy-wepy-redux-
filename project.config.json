@@ -7,7 +7,7 @@
     "minified": false
   },
   "compileType": "miniprogram",
-  "appid": "touristappid",
+  "appid": "wx2e0f86893a4dfe04",
   "projectname": "yk-wxapp",
   "miniprogramRoot": "./dist"
 }

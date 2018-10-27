@@ -1,0 +1,110 @@
+<template>
+  <view class="classify_wrapper">
+          <scroll-view class="classify_category" style="height:{{windowHeight}}px" scroll-y scroll-with-animation="true">
+          <repeat  for="{{categoryList}}" key="index" index="index">
+              <view class="category_name {{categoryId === item.id ? 'active':'' }}"  @tap="getCategoryId({{index}})">{{item.name}}</view>
+          </repeat>
+      </scroll-view>
+      
+      <scroll-view  scroll-y scroll-with-animation="true" style="height:{{windowHeight}}px; border-top:1px solid rgb(200, 200, 200);">
+          <view class="classify_detail">
+                <repeat for="{{categoryList[categoryId].categoryDetail}}"  key="idx" index="idx" item="data">
+                 
+                  <view class="category_detail">
+                      <view>
+                           <image class="detail_img" src="{{data.img}}" mode="scaleToFill"
+                    lazy-load="false">
+                  </image> 
+                    </view> 
+                  <view class="detail_name">
+                  {{data.detailName}}
+                  </view>
+                  </view>
+              </repeat>
+          </view>
+            
+      </scroll-view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import api from '../api/api'
+export default class Classify extends wepy.page {
+  config = {
+    navigationBarTitleText: '分类'
+  }
+  data = {
+    categoryList: [],
+    categoryId: 0,
+    windowHeight: 0
+  };
+  onLoad() {
+    let that = this
+    that.getGoodsCategory()
+    this.windowHeight = wepy.getSystemInfoSync().windowHeight
+  }
+  async getGoodsCategory() {
+    const data = await api.getGoodCategory({})
+    this.categoryList = data.data.category
+    this.$apply()
+    console.log(this.categoryList)
+  }
+  computed = {}
+  methods = {
+    getCategoryId(id) {
+      this.categoryId = id
+    }
+  }
+}
+</script>
+<style lang="less" scoped>
+.classify_wrapper {
+  height: 100%;
+  display: flex;
+  position: relative;
+  .classify_category {
+    width: 200rpx;
+    position: relative;
+    z-index: 1;
+    border-right: 1px solid rgb(200, 200, 200);
+    border-top: 1px solid rgb(200, 200, 200);
+    .category_name {
+      text-align: center;
+      height: 100rpx;
+      line-height: 100rpx;
+      font-size: 28rpx;
+      color: #666;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &.active {
+        background: #666;
+        color: #fff;
+      }
+    }
+  }
+  .classify_detail {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    .category_detail {
+      width: 170rpx;
+      height: 170rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-left: 26rpx;
+      .detail_img {
+        width: 100rpx;
+        height: 100rpx;
+      }
+      .detail_name {
+        font-size: 26rpx;
+        color: #666;
+      }
+    }
+  }
+}
+</style>

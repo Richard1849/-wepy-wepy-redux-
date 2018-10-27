@@ -80,7 +80,7 @@ export default class DetailsData extends wepy.component {
   text-align:  left;
   color:  rgb(156, 156, 156);
 }
-.good-price{
+.good-price{ 
   height: 70rpx;
   color:  rgb(255, 0, 0);
   font-weight:  600;
@@ -130,7 +130,7 @@ export default class DetailsData extends wepy.component {
     .bargined_price_style{
       color:  rgb(168, 168, 168);
       text-decoration: line-through;
-      margin-left:10rpx;
+      margin-left: 10rpx;
 }
   }
   .btn_bargain{
